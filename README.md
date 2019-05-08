@@ -4,13 +4,18 @@ This quick app was made for just playing around with [Svelte 3](https://svelte.d
 
 ## Installation
 
-1. Clone the repository.
-1. In the repository's directory, run the following in a terminal:
-    ```
-    $ npm install
-    $ npm run dev
-    ```
-1. Open your browser and go to `localhost:5000`.
+Clone the repository. In the repository's directory, run the following in a terminal:
+```
+$ npm install
+$ npm run dev
+```
+Open your browser and go to `localhost:5000`.
+
+To deploy, build the app:
+```
+$ npm run build
+```
+Serve the `public` directory.
 
 ## Features
 
