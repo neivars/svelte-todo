@@ -15,12 +15,14 @@ This quick app was made for just playing around with [Svelte 3](https://svelte.d
 ## Features
 
 * Add new todo items by adding text to the input and submitting (enter or clicking the Add button).
+* Todo items are persistent to Local Storage.
+* Click the X in a todo item to delete it.
 
 ## Todo
 
-* Use Local Storage to store the todo items.
+* ~~Use Local Storage to store the todo items.~~
 * Add functionality to edit todo items.
-* Add functionality to delete todo items.
+* ~~Add functionality to delete todo items.~~
 * Figure out how to do and add tests.
 
 ## License
