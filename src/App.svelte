@@ -1,21 +1,38 @@
 <script>
-    import Todo from './components/Todo.svelte';
+    import Todo from "./components/Todo.svelte";
+    import todoStorage from "./services/storage.js";
 
-    document.body.classList.add('bg-light');
+    document.body.classList.add("bg-light");
 
-    let todoTexts = [];
+    let todoItems = todoStorage.getTodoItems();
 
-    let inputText = '';
+    let inputText = "";
 
-    function createTodo(event) {
-        event.preventDefault();
-
-        if (inputText.trim() == '') {
+    function handleCreateTodo(event) {
+        if (inputText.trim() == "") {
             return;
         }
 
-        todoTexts = [...todoTexts, inputText];
-        inputText = '';
+        todoStorage.saveTodoItem(inputText);
+        todoItems = todoStorage.getTodoItems();
+        inputText = "";
+    }
+
+    function handleUpdateTodo(event) {
+        const {
+            uid,
+            text
+        } = event.detail;
+        todoStorage.updateTodoItem(uid, text);
+        todoItems = todoStorage.getTodoItems();
+    }
+
+    function handleDeleteTodo(event) {
+        const {
+            uid
+        } = event.detail;
+        todoStorage.deleteTodoItem(uid);
+        todoItems = todoStorage.getTodoItems();
     }
 </script>
 
@@ -31,7 +48,7 @@
 </header>
 
 <main>
-    <form on:submit={createTodo} class="container">
+    <form on:submit|preventDefault={handleCreateTodo} class="container">
         <div class="input-group mb-5">
             <input type="text" class="form-control" placeholder="New todo" aria-label="Input new todo"
                 aria-describedby="createTodo" bind:value={inputText}>
@@ -42,8 +59,8 @@
     </form>
 
     <section class="row px-2">
-        {#each todoTexts as text }
-            <Todo {text} />
+        {#each todoItems as {uid, text} (uid)}
+            <Todo {text} {uid} on:update={handleUpdateTodo} on:delete={handleDeleteTodo} />
         {/each}
     </section>
 </main>
